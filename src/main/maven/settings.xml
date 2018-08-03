@@ -8,16 +8,13 @@
     <localRepository>${user.home}/.m2/repository</localRepository>
 
     <mirrors>
+        <!-- @formatter:off -->
         <!-- Do not use variable substitution in mirrors when using an IDE, it does not works. -->
         <!-- mirrorOf: pom.xml repositories repository id -->
         <!--<mirrorOf>central</mirrorOf>-->
         <!--<mirrorOf>external:*,!github-mvn-repo-wagon-maven-plugin</mirrorOf>-->
-        <!--mirror>
-            <id>mirror</id>
-            <name>mirror</name>
-            <url>http://nexus3:28081/nexus/repository/maven-public/</url>
-            <mirrorOf>*</mirrorOf>
-        </mirror-->
+        <!--<mirror><id>mirror</id><name>mirror</name><url>http://nexus3:28081/nexus/repository/maven-public/</url><mirrorOf>*</mirrorOf></mirror>-->
+        <!-- @formatter:on -->
     </mirrors>
 
     <offline/>
@@ -30,6 +27,9 @@
         <pluginGroup>org.springframework.boot</pluginGroup>
     </pluginGroups>
 
+    <profiles>
+    </profiles>
+
     <proxies>
         <!--<proxy><id>http-proxy</id><active>true</active><protocol>http</protocol><host>127.0.0.1</host><port>8080</port><nonProxyHosts>127.0.0.1</nonProxyHosts></proxy>-->
         <!--<proxy><id>http-proxy</id><active>true</active><protocol>socks5</protocol><host>127.0.0.1</host><port>1080</port><nonProxyHosts>127.0.0.1</nonProxyHosts></proxy>-->
@@ -37,20 +37,18 @@
 
     <servers>
         <!-- @formatter:off -->
-        <server><id>gpg.passphrase</id><passphrase>${env.CI_OPT_GPG_PASSPHRASE}</passphrase></server>
-        <server><id>github</id><password>${env.CI_INFRA_OPT_OPENSOURCE_GIT_AUTH_TOKEN}</password></server>
-        <server><id>OSSRH-staging</id><username>${env.CI_OPT_MAVEN_CENTRAL_USER}</username><password>${env.CI_OPT_MAVEN_CENTRAL_PASS}</password></server>
-        <server><id>OSSRH-snapshots</id><username>${env.CI_OPT_MAVEN_CENTRAL_USER}</username><password>${env.CI_OPT_MAVEN_CENTRAL_PASS}</password></server>
         <server>
             <id>docker-hub</id>
             <username>${env.CI_OPT_DOCKER_REGISTRY_USER}</username><password>${env.CI_OPT_DOCKER_REGISTRY_PASS}</password>
             <configuration><email>${env.CI_OPT_DOCKER_DOCKERHUB_MAIL}</email></configuration>
         </server>
+        <server><id>github</id><password>${env.CI_INFRA_OPT_OPENSOURCE_GIT_AUTH_TOKEN}</password></server>
+        <server><id>gpg.passphrase</id><passphrase>${env.CI_OPT_GPG_PASSPHRASE}</passphrase></server>
+        <server><id>opensource-mvnsite</id><username>${env.CI_INFRA_OPT_OPENSOURCE_MVNSITE_USERNAME}</username><password>${env.CI_INFRA_OPT_OPENSOURCE_MVNSITE_PASSWORD}</password></server>
+        <server><id>OSSRH-snapshots</id><username>${env.CI_OPT_MAVEN_CENTRAL_USER}</username><password>${env.CI_OPT_MAVEN_CENTRAL_PASS}</password></server>
+        <server><id>OSSRH-staging</id><username>${env.CI_OPT_MAVEN_CENTRAL_USER}</username><password>${env.CI_OPT_MAVEN_CENTRAL_PASS}</password></server>
         <!-- @formatter:on -->
     </servers>
-
-    <profiles>
-    </profiles>
 
     <usePluginRegistry/>
 </settings>
