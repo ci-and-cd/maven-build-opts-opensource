@@ -28,6 +28,38 @@
     </pluginGroups>
 
     <profiles>
+        <!-- @formatter:off -->
+        <profile>
+            <id>default-public-repositories</id>
+            <activation><activeByDefault>true</activeByDefault></activation>
+            <repositories>
+                <!-- Make artifacts in OSSRH repositories available -->
+                <repository>
+                    <id>OSSRH-releases</id>
+                    <name>central releases</name>
+                    <url>https://oss.sonatype.org/content/repositories/releases/</url>
+                    <releases><enabled>true</enabled></releases>
+                    <snapshots><enabled>false</enabled></snapshots>
+                </repository>
+                <repository>
+                    <id>OSSRH-snapshots</id>
+                    <name>central snapshots</name>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+                    <releases><enabled>false</enabled></releases>
+                    <snapshots><enabled>true</enabled></snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>central</id>
+                    <name>central</name>
+                    <url>http://repo1.maven.org/maven2</url>
+                    <releases><enabled>true</enabled></releases>
+                    <snapshots><enabled>false</enabled></snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+        <!-- @formatter:on -->
     </profiles>
 
     <proxies>
