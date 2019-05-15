@@ -11,9 +11,9 @@ if [ -z "${CI_INFRA_OPT_NEXUS3}" ]; then CI_INFRA_OPT_NEXUS3="https://nexus3.inf
 
 ### CI OPTS BEGIN
 if [ -z "${CI_OPT_CHECKSTYLE_CONFIG_LOCATION}" ]; then CI_OPT_CHECKSTYLE_CONFIG_LOCATION="${CI_OPT_MAVEN_BUILD_REPO}/src/main/checkstyle/google_checks_8.10.xml"; fi
-
+# default: https://nodejs.org/dist/  taobao: https://npm.taobao.org/mirrors/node/"
 #if [ -z "${CI_OPT_FRONTEND_NODEDOWNLOADROOT}" ]; then CI_OPT_FRONTEND_NODEDOWNLOADROOT="https://nodejs.org/dist/"; fi
-
+# default: http://registry.npm.taobao.org/npm/-/"  taobao: http://registry.npm.taobao.org/npm/-/
 #if [ -z "${CI_OPT_FRONTEND_NPMDOWNLOADROOT}" ]; then CI_OPT_FRONTEND_NPMDOWNLOADROOT="https://registry.npmjs.org/npm/-/"; fi
 if [ -z "${CI_OPT_PMD_RULESET_LOCATION}" ]; then CI_OPT_PMD_RULESET_LOCATION="${CI_OPT_MAVEN_BUILD_REPO}/src/main/pmd/pmd-ruleset-6.4.0.xml"; fi
 ### CI OPTS END
