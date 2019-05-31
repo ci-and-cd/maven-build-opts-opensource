@@ -4,6 +4,15 @@
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
                         http://maven.apache.org/xsd/settings-1.0.0.xsd">
 
+    <!--
+    see:
+    [Add ability to easily retrieve core extensions from alternative pluginRepository](https://issues.apache.org/jira/browse/MNG-6327)
+    [Maven core extension resolution ignores repositories from activeByDefault profiles in settings.xml](https://issues.apache.org/jira/browse/MNG-5984)
+    -->
+    <activeProfiles>
+        <activeProfile>repos-for-core-extensions</activeProfile>
+    </activeProfiles>
+
     <interactiveMode/>
     <localRepository>${user.home}/.m2/repository</localRepository>
 
@@ -13,7 +22,9 @@
         <!-- mirrorOf: pom.xml repositories repository id -->
         <!--<mirrorOf>central</mirrorOf>-->
         <!--<mirrorOf>external:*,!github-mvn-repo-wagon-maven-plugin</mirrorOf>-->
-        <!--<mirror><id>mirror</id><name>mirror</name><url>http://nexus3:28081/nexus/repository/maven-public/</url><mirrorOf>*</mirrorOf></mirror>-->
+        <!--<mirror><id>mirror</id><mirrorOf>*</mirrorOf><name>mirror</name><url>http://nexus3:28081/nexus/repository/maven-public/</url></mirror>-->
+        <!--<mirror><id>mirror</id><mirrorOf>*</mirrorOf><url>https://nexus3.infra.top/nexus/repository/maven-public/</url></mirror>-->
+
         <!-- @formatter:on -->
     </mirrors>
 
@@ -22,6 +33,8 @@
     <pluginGroups>
         <pluginGroup>com.github.ferstl</pluginGroup>
         <pluginGroup>com.github.spotbugs</pluginGroup>
+        <pluginGroup>io.quarkus</pluginGroup>
+        <pluginGroup>io.takari</pluginGroup>
         <pluginGroup>org.apache.maven.plugins</pluginGroup>
         <pluginGroup>org.apache.tomcat.maven</pluginGroup>
         <pluginGroup>org.codehaus.mojo</pluginGroup>
@@ -29,7 +42,6 @@
         <pluginGroup>org.reficio</pluginGroup>
         <pluginGroup>org.sonarsource.scanner.maven</pluginGroup>
         <pluginGroup>org.springframework.boot</pluginGroup>
-        <pluginGroup>io.takari</pluginGroup>
     </pluginGroups>
 
     <profiles>
@@ -64,6 +76,27 @@
                 </pluginRepository>
             </pluginRepositories>
         </profile>
+        <profile>
+            <id>repos-for-core-extensions</id>
+            <repositories>
+                <repository>
+                    <id>OSSRH-snapshots</id>
+                    <name>central snapshots</name>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+                    <releases><enabled>false</enabled></releases>
+                    <snapshots><enabled>true</enabled><updatePolicy>daily</updatePolicy></snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>OSSRH-snapshots</id>
+                    <name>central snapshots</name>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+                    <releases><enabled>false</enabled></releases>
+                    <snapshots><enabled>true</enabled><updatePolicy>daily</updatePolicy></snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
         <!-- @formatter:on -->
     </profiles>
 
@@ -85,6 +118,18 @@
             <username>${env.CI_OPT_DOCKER_REGISTRY_USER}</username><password>${env.CI_OPT_DOCKER_REGISTRY_PASS}</password>
         </server>
         <server><id>github</id><password>${env.CI_OPT_OPENSOURCE_GIT_AUTH_TOKEN}</password></server>
+        <!--
+        To fix issue: gpg: signing failed: Inappropriate ioctl for device
+        1.
+        ~/.gnupg/gpg.conf:
+        use-agent
+        pinentry-mode loopback
+        2.
+        ~/.gnupg/gpg-agent.conf:
+        allow-loopback-pinentry
+        3.
+        echo RELOADAGENT | gpg-connect-agent
+        -->
         <server><id>gpg.passphrase</id><passphrase>${env.CI_OPT_GPG_PASSPHRASE}</passphrase></server>
         <server><id>opensource-mvnsite</id><username>${env.CI_OPT_OPENSOURCE_MVNSITE_USERNAME}</username><password>${env.CI_OPT_OPENSOURCE_MVNSITE_PASSWORD}</password></server>
         <server><id>OSSRH-snapshots</id><username>${env.CI_OPT_MAVEN_CENTRAL_USER}</username><password>${env.CI_OPT_MAVEN_CENTRAL_PASS}</password></server>
