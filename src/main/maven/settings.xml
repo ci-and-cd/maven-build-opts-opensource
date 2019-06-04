@@ -14,7 +14,8 @@
     </activeProfiles>
 
     <interactiveMode/>
-    <localRepository>${user.home}/.m2/repository</localRepository>
+    <!-- org.springframework.cloud:spring-cloud-contract-maven-plugin can not substitute variables in localRepository tag correctly -->
+    <!--<localRepository>${user.home}/.m2/repository</localRepository>-->
 
     <mirrors>
         <!-- @formatter:off -->
