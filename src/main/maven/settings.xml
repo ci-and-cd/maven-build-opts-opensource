@@ -4,15 +4,6 @@
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
                         http://maven.apache.org/xsd/settings-1.0.0.xsd">
 
-    <!--
-    see:
-    [Add ability to easily retrieve core extensions from alternative pluginRepository](https://issues.apache.org/jira/browse/MNG-6327)
-    [Maven core extension resolution ignores repositories from activeByDefault profiles in settings.xml](https://issues.apache.org/jira/browse/MNG-5984)
-    -->
-    <activeProfiles>
-        <activeProfile>repos-for-core-extensions</activeProfile>
-    </activeProfiles>
-
     <interactiveMode/>
     <!-- org.springframework.cloud:spring-cloud-contract-maven-plugin can not substitute variables in localRepository tag correctly -->
     <!--<localRepository>${user.home}/.m2/repository</localRepository>-->
@@ -74,27 +65,6 @@
                     <url>https://repo1.maven.org/maven2</url>
                     <releases><enabled>true</enabled></releases>
                     <snapshots><enabled>false</enabled></snapshots>
-                </pluginRepository>
-            </pluginRepositories>
-        </profile>
-        <profile>
-            <id>repos-for-core-extensions</id>
-            <repositories>
-                <repository>
-                    <id>OSSRH-snapshots</id>
-                    <name>central snapshots</name>
-                    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-                    <releases><enabled>false</enabled></releases>
-                    <snapshots><enabled>true</enabled><updatePolicy>daily</updatePolicy></snapshots>
-                </repository>
-            </repositories>
-            <pluginRepositories>
-                <pluginRepository>
-                    <id>OSSRH-snapshots</id>
-                    <name>central snapshots</name>
-                    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-                    <releases><enabled>false</enabled></releases>
-                    <snapshots><enabled>true</enabled><updatePolicy>daily</updatePolicy></snapshots>
                 </pluginRepository>
             </pluginRepositories>
         </profile>
