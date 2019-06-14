@@ -100,8 +100,12 @@
         allow-loopback-pinentry
         3.
         echo RELOADAGENT | gpg-connect-agent
+
+        You may get error when CI_OPT_GPG_PASSPHRASE is absent or blank.
+        [ERROR] Settings problem for server gpg.passphrase:
+        [ERROR] Failed to decrypt passphrase for server gpg.passphrase: org.sonatype.plexus.components.cipher.PlexusCipherException: java.lang.ArrayIndexOutOfBoundsException @ server: gpg.passphrase
         -->
-        <server><id>gpg.passphrase</id><passphrase>${env.CI_OPT_GPG_PASSPHRASE}</passphrase></server>
+        <!--<server><id>gpg.passphrase</id><passphrase>${env.CI_OPT_GPG_PASSPHRASE}</passphrase></server>-->
         <server><id>opensource-mvnsite</id><username>${env.CI_OPT_OPENSOURCE_MVNSITE_USERNAME}</username><password>${env.CI_OPT_OPENSOURCE_MVNSITE_PASSWORD}</password></server>
         <server><id>OSSRH-snapshots</id><username>${env.CI_OPT_MAVEN_CENTRAL_USER}</username><password>${env.CI_OPT_MAVEN_CENTRAL_PASS}</password></server>
         <server><id>OSSRH-staging</id><username>${env.CI_OPT_MAVEN_CENTRAL_USER}</username><password>${env.CI_OPT_MAVEN_CENTRAL_PASS}</password></server>
