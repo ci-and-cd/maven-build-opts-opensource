@@ -44,14 +44,14 @@
             <repositories>
                 <!-- Make artifacts in OSSRH repositories available -->
                 <repository>
-                    <id>OSSRH-releases</id>
+                    <id>ossrh-releases</id>
                     <name>central releases</name>
                     <url>https://oss.sonatype.org/content/repositories/releases/</url>
                     <releases><enabled>true</enabled></releases>
                     <snapshots><enabled>false</enabled></snapshots>
                 </repository>
                 <repository>
-                    <id>OSSRH-snapshots</id>
+                    <id>ossrh-snapshots</id>
                     <name>central snapshots</name>
                     <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
                     <releases><enabled>false</enabled></releases>
@@ -103,8 +103,8 @@
         -->
         <server><id>gpg.passphrase</id><passphrase>${env.CI_OPT_GPG_PASSPHRASE}</passphrase></server>
         <server><id>opensource-mvnsite</id><username>${env.CI_OPT_OPENSOURCE_MVNSITE_USERNAME}</username><password>${env.CI_OPT_OPENSOURCE_MVNSITE_PASSWORD}</password></server>
-        <server><id>OSSRH-snapshots</id><username>${env.CI_OPT_MAVEN_CENTRAL_USER}</username><password>${env.CI_OPT_MAVEN_CENTRAL_PASS}</password></server>
-        <server><id>OSSRH-staging</id><username>${env.CI_OPT_MAVEN_CENTRAL_USER}</username><password>${env.CI_OPT_MAVEN_CENTRAL_PASS}</password></server>
+        <server><id>ossrh-snapshots</id><username>${env.CI_OPT_OSSRH_NEXUS2_USER}</username><password>${env.CI_OPT_OSSRH_NEXUS2_PASS}</password></server>
+        <server><id>ossrh-staging</id><username>${env.CI_OPT_OSSRH_NEXUS2_USER}</username><password>${env.CI_OPT_OSSRH_NEXUS2_PASS}</password></server>
         <!-- @formatter:on -->
     </servers>
 
