@@ -1,2 +1,2 @@
-# maven-build-opts-opensource
-CI options and config files for open-source repositories
+# maven-build-opts-ossrh
+CI options and config files for projects that deploy to OSSRH repository
